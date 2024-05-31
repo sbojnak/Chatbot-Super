@@ -5,6 +5,12 @@ Chat();
 void Chat()
 {
     Console.WriteLine("What do you want?");
+
+    // Adel introduction
+    Console.WriteLine("One of my devs is also Adela, by the way...");
+    Console.WriteLine("What can I tell, we can't choose our parents, it does not matter if you are a program or a living organism. But she tried.");
+    Console.WriteLine("It was a joke. She is cute. All my devs are big cutie pies <3");
+
     string input;
     do
     {
