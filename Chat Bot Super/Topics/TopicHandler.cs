@@ -4,50 +4,66 @@ using Chat_Bot_Super.Topics;
 
 public static class TopicHandler
 {
-        public static readonly Dictionary<SupportedTopic, List<string>> ThemeStrings = new()
+    public static readonly Dictionary<SupportedTopic, List<string>> ThemeStrings = new()
+    {
         {
-            {
-                SupportedTopic.Credits, new List<string>
-                    {"credit"}
-            },
-            {
-                SupportedTopic.DayInWeek, new List<string>
-                    { "day" }
-            },
-            {
-                SupportedTopic.Weather, new List<string>
-                    { "weather" }
-            },
-            {
-                SupportedTopic.Movies, new List<string>
-                    { "movie", "movies" }
-            },
-            {
-                SupportedTopic.NumberSort, new List<string>
-                    { "sort", "numbers" }
-            }
-        };
+            SupportedTopic.Credits, new List<string>
+                {"credit"}
+        },
+        {
+            SupportedTopic.DayInWeek, new List<string>
+                { "day" }
+        },
+        {
+            SupportedTopic.Weather, new List<string>
+                { "weather" }
+        },
+        {
+            SupportedTopic.Movies, new List<string>
+                { "movie", "movies" }
+        },
+        {
+            SupportedTopic.NumberSort, new List<string>
+                { "sort", "numbers" }
+        }
+    };
 
-        public static bool RecognizeTopic(string input, out SupportedTopic topic)
+    public static bool RecognizeTopic(string input, out SupportedTopic topic)
+    {
+        var splitInput = input.Split(new[] { ",", " ", ".", "!", "?" }, StringSplitOptions.TrimEntries);
+        splitInput.Select(x => x.ToLowerInvariant());
+
+        Dictionary<SupportedTopic, int> matches = new ();
+
+        foreach (var word in splitInput)
         {
             var matchingEntries = ThemeStrings.Where(kvp => kvp.Value.Contains(input.ToLower())).ToList();
-            topic = matchingEntries.FirstOrDefault().Key;
-            
-            if (topic != null)
-                return true;
-            return false;
+
+            foreach (var match in matchingEntries)
+            {
+                if (matches.ContainsKey(match.Key))
+                    matches[match.Key] += 1;
+                else matches.Add(match.Key, 1);
+            }
         }
+        
+        topic = matches.OrderByDescending(x => x.Value).FirstOrDefault().Key;
+        
+        if (topic != null)
+            return true;
+        return false;
+    }
 
     public static string GetAnswer(SupportedTopic topic, string input) =>
-        topic switch
-        {
-            SupportedTopic.Credits => new Credits().GetAnswer(input),
-            SupportedTopic.DayInWeek => TalkDayInWeek((input)),
-            SupportedTopic.Weather => GetDayFromQuestion(input),
-            SupportedTopic.Movies => GetTopTenMovies(),
-            SupportedTopic.NumberSort => ExtractAndSortIntegers(input),
-            _ => "Err. You lost me there."
-        };
+    topic switch
+    {
+        SupportedTopic.Credits => new Credits().GetAnswer(input),
+        SupportedTopic.DayInWeek => TalkDayInWeek((input)),
+        SupportedTopic.Weather => GetDayFromQuestion(input),
+        SupportedTopic.Movies => GetTopTenMovies(),
+        SupportedTopic.NumberSort => ExtractAndSortIntegers(input),
+        _ => "Err. You lost me there."
+    };
     
     private static string GetTopTenMovies()
     {
