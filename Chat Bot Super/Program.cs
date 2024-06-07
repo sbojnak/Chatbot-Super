@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System;
 
 Console.Clear();
 Console.WriteLine(CreditsJakub());
@@ -7,6 +8,11 @@ Chat();
 
 void Chat()
 {
+    Console.WriteLine("Andrea Habáňová");
+    Console.WriteLine("I'm a junior developer from Brno.");
+    Console.WriteLine("I love indie music, weird movies and serial killers.");
+
+
     Console.WriteLine("What do you want?");
 
     // Adel introduction
