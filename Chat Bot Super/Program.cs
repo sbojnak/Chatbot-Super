@@ -8,7 +8,7 @@ Chat();
 
 void Chat()
 {
-    Console.WriteLine("Andrea Habáňová");
+    Console.WriteLine("Hi I'm Andrea");
     Console.WriteLine("I'm a junior developer from Brno.");
     Console.WriteLine("I love indie music, weird movies and serial killers.");
 
