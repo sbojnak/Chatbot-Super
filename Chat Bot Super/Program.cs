@@ -1,4 +1,7 @@
-﻿Console.Clear();
+﻿using System.Text;
+
+Console.Clear();
+Console.WriteLine(CreditsJakub());
 Chat();
 
 
@@ -37,4 +40,14 @@ void Chat()
         Console.WriteLine("Could not recognize theme");
         Chat();
     }
+}
+
+string CreditsJakub()
+{
+    var sb = new StringBuilder();
+    sb.AppendLine("Ahoj,");
+    sb.AppendLine("já jsem Kubass hoď si provaz!");
+    sb.AppendLine("Poslouchám hip hop a neposlouchám autority.");
+    sb.AppendLine("A to je asi tak vše o mě. Čau.");
+    return sb.ToString();
 }
