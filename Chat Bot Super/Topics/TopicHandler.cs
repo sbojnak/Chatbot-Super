@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 
-public static class Topics
+public static class TopicHandler
 {
     public static readonly Dictionary<SupportedTopic, List<string>> ThemeStrings = new()
     {

@@ -26,23 +26,23 @@ void Chat()
         input = Console.ReadLine();
     } while (string.IsNullOrEmpty(input));
 
-    var theme = Topics.RecognizeTheme(input);
+    var theme = TopicHandler.RecognizeTheme(input);
 
     if (theme != null)
     {
         switch (theme)
         {
             case SupportedTopic.Movies:
-                Console.WriteLine(Topics.GetTopTenMovies());
+                Console.WriteLine(TopicHandler.GetTopTenMovies());
                 break;
             case SupportedTopic.Weather:
-                Console.WriteLine(Topics.GetDayFromQuestion(input));
+                Console.WriteLine(TopicHandler.GetDayFromQuestion(input));
                 break;
             case SupportedTopic.NumberSort:
-                Console.WriteLine(Topics.ExtractAndSortIntegers(input));
+                Console.WriteLine(TopicHandler.ExtractAndSortIntegers(input));
                 break;
             case SupportedTopic.DayInWeek:
-                Console.WriteLine(Topics.TalkDayInWeek(input));
+                Console.WriteLine(TopicHandler.TalkDayInWeek(input));
                 break;
         }
         Chat();
