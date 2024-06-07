@@ -31,14 +31,11 @@ public static class TopicHandler
     public static bool RecognizeTopic(string input, out SupportedTopic topic)
     {
         var splitInput = input.Split(new[] { ",", " ", ".", "!", "?" }, StringSplitOptions.TrimEntries);
-        splitInput.Select(x => x.ToLowerInvariant());
 
         Dictionary<SupportedTopic, int> matches = new ();
-
         foreach (var word in splitInput)
         {
-            var matchingEntries = ThemeStrings.Where(kvp => kvp.Value.Contains(input.ToLower())).ToList();
-
+            var matchingEntries = ThemeStrings.Where(kvp => kvp.Value.Contains(word.ToLower())).ToList();
             foreach (var match in matchingEntries)
             {
                 if (matches.ContainsKey(match.Key))
