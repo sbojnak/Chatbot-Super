@@ -6,6 +6,10 @@ public static class TopicHandler
     public static readonly Dictionary<SupportedTopic, List<string>> ThemeStrings = new()
     {
         {
+            SupportedTopic.Credits, new List<string>
+                {"credit"}
+        },
+        {
             SupportedTopic.DayInWeek, new List<string>
                 { "day" }
         },
@@ -121,6 +125,7 @@ public static class TopicHandler
 
 public enum SupportedTopic
 {
+    Credits,
     DayInWeek,
     Weather,
     Movies,
