@@ -1,43 +1,59 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
+using Chat_Bot_Super.Topics;
 
 public static class TopicHandler
 {
-    public static readonly Dictionary<SupportedTopic, List<string>> ThemeStrings = new()
-    {
+        public static readonly Dictionary<SupportedTopic, List<string>> ThemeStrings = new()
         {
-            SupportedTopic.Credits, new List<string>
-                {"credit"}
-        },
-        {
-            SupportedTopic.DayInWeek, new List<string>
-                { "day" }
-        },
-        {
-            SupportedTopic.Weather, new List<string>
-                { "weather" }
-        },
-        {
-            SupportedTopic.Movies, new List<string>
-                { "movie", "movies" }
-        },
-        {
-            SupportedTopic.NumberSort, new List<string>
-                { "sort", "numbers" }
-        }
-    };
+            {
+                SupportedTopic.Credits, new List<string>
+                    {"credit"}
+            },
+            {
+                SupportedTopic.DayInWeek, new List<string>
+                    { "day" }
+            },
+            {
+                SupportedTopic.Weather, new List<string>
+                    { "weather" }
+            },
+            {
+                SupportedTopic.Movies, new List<string>
+                    { "movie", "movies" }
+            },
+            {
+                SupportedTopic.NumberSort, new List<string>
+                    { "sort", "numbers" }
+            }
+        };
 
-    public static SupportedTopic? RecognizeTheme(string input)
-    {
-        var matchingEntries = ThemeStrings.Where(kvp => kvp.Value.Contains(input.ToLower())).ToList();
-        return matchingEntries.FirstOrDefault().Key;
-    }
+        public static bool RecognizeTopic(string input, out SupportedTopic topic)
+        {
+            var matchingEntries = ThemeStrings.Where(kvp => kvp.Value.Contains(input.ToLower())).ToList();
+            topic = matchingEntries.FirstOrDefault().Key;
+            
+            if (topic != null)
+                return true;
+            return false;
+        }
+
+    public static string GetAnswer(SupportedTopic topic, string input) =>
+        topic switch
+        {
+            SupportedTopic.Credits => new Credits().GetAnswer(input),
+            SupportedTopic.DayInWeek => TalkDayInWeek((input)),
+            SupportedTopic.Weather => GetDayFromQuestion(input),
+            SupportedTopic.Movies => GetTopTenMovies(),
+            SupportedTopic.NumberSort => ExtractAndSortIntegers(input),
+            _ => "Err. You lost me there."
+        };
     
-    public static string GetTopTenMovies()
+    private static string GetTopTenMovies()
     {
         return "Here's a list of the top ten movies of all time: 1. The Godfather (1972), 2. The Shawmovieshank Redemption (1994), 3. Schindler's List(1993), 4. Raging Bull (1980), 5. Casablanca (1942), 6. Citizen Kane (1941), 7. Gone with the Wind(1939), 8. The Wizard of Oz (1939), 9. One Flew Over the Cuckoo's Nest (1975), 10. Lawrence of Arabia (1962)";
     }
-    public static string ExtractAndSortIntegers(string input)
+    private static string ExtractAndSortIntegers(string input)
     {
         string pattern = @"[,\s;]+";
         string[] parts = Regex.Split(input, pattern);
@@ -64,7 +80,7 @@ public static class TopicHandler
         return sb.ToString();
     }
     
-    public static string TalkDayInWeek(string? question)
+    private static string TalkDayInWeek(string? question)
     {
         if (!string.IsNullOrEmpty(question))
         {
@@ -89,7 +105,7 @@ public static class TopicHandler
         }
         return "Chatbot: No input received.";
     }
-    public static string GetDayFromQuestion(string question)
+    private static string GetDayFromQuestion(string question)
     {
         if (question.ToLower().Contains("yesterday"))
         {
@@ -108,7 +124,6 @@ public static class TopicHandler
             return "I don't understand your question about weather, please try asking again.";
         }
     }
- 
     private static string GetWeatherYesterday()
     {
         return "Yesterday's weather was sunny with a high of 75°F and a low of 55°F.";
