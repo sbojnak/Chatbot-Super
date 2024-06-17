@@ -56,7 +56,7 @@ public class Credits : ITopic
     {
         var sb = new StringBuilder();
 
-        sb.AppendLine("Hi, I'm Veronika");
+        sb.AppendLine("Hi, I'm Veronika!");
         sb.AppendLine("Not sure what to write...");
         sb.AppendLine("I like dogs and ice cream.");
 
