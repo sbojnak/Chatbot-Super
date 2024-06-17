@@ -2,6 +2,11 @@
 
 namespace Chat_Bot_Super.Topics
 {
+    /// <summary>
+    /// The Weather class implements the ITopic interface and provides weather information for yesterday, today, and tomorrow.
+    /// It contains private methods that take the string input and returns the corresponding weather information based on keywords "yesterday", "today", or "tomorrow".
+    /// If the input doesn't contain these keywords, it returns a message indicating that the input is not understood.
+    /// </summary>
     public class Weather : ITopic
     {
         private string GetWeatherYesterday()
