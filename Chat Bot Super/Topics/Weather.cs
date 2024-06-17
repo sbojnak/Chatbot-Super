@@ -33,7 +33,7 @@ namespace Chat_Bot_Super.Topics
             }
             else
             {
-                return "I don't understand your question about weather, please try asking again.";
+                return "I don't understand your question about the weather, try asking again about the weather for yesterday, today or tomorrow.";
             }
         }
     }
