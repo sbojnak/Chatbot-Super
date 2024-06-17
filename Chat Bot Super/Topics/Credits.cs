@@ -11,7 +11,8 @@ public class Credits : ITopic
         sb.AppendLine(Jakub());
         sb.AppendLine(Adela());
         sb.AppendLine(Andrea());
-        
+        sb.AppendLine(Veronika());
+
         return sb.ToString();
     }
 
@@ -50,4 +51,16 @@ public class Credits : ITopic
 
         return sb.ToString();
     }
+
+    private string Veronika()
+    {
+        var sb = new StringBuilder();
+
+        sb.AppendLine("Hi, I'm Veronika");
+        sb.AppendLine("Not sure what to write...");
+        sb.AppendLine("I like dogs and ice cream.");
+
+        return sb.ToString();
+    }
+
 }
