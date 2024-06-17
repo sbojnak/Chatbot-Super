@@ -9,6 +9,8 @@ public class Credits : ITopic
         var sb = new StringBuilder();
 
         sb.AppendLine(Jakub());
+        sb.AppendLine(Adela());
+        sb.AppendLine(Andrea());
         
         return sb.ToString();
     }
@@ -24,6 +26,28 @@ public class Credits : ITopic
         sb.AppendLine("Common knowledge but important nonetheless.");
         sb.AppendLine("Thank you.");
         
+        return sb.ToString();
+    }
+
+    private string Adela()
+    {
+        var sb = new StringBuilder();
+
+        sb.AppendLine("One of my devs is also Adela, by the way...");
+        sb.AppendLine("What can I tell, we can't choose our parents, it does not matter if you are a program or a living organism. But she tried.");
+        sb.AppendLine("It was a joke. She is cute. All my devs are big cutie pies <3");
+
+        return sb.ToString();
+    }
+
+    private string Andrea()
+    {
+        var sb = new StringBuilder();
+
+        sb.AppendLine("Hi I'm Andrea");
+        sb.AppendLine("I'm a junior developer from Brno.");
+        sb.AppendLine("I love indie music, weird movies and serial killers.");
+
         return sb.ToString();
     }
 }
